@@ -1,0 +1,303 @@
+v<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Challenges - Solo Leveling</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212; /* Pure black background */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    flex-direction: column;
+    margin: 0; /* Removed margin to prevent unwanted space */
+}
+
+/* Heading */
+h1 {
+    font-size: 3rem; /* Increased font size */
+    margin-bottom: 1.5rem; /* Reduced space below the heading */
+    text-align: center;
+    color: #00BFFF; /* Blue glow like Solo Leveling */
+    text-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+}
+
+h1 i {
+    margin-right: 10px; /* Adds space between the icon and text */
+    color: #00BFFF;
+}
+
+/* Dashboard Container */
+.container {
+    width: 90%;
+    max-width: 600px; /* Increased container width */
+    height: auto; /* Automatic height adjustment based on content */
+    background-color: #1a1a1a;
+    border-radius: 20px; /* Increased border radius */
+    box-shadow: 0 4px 20px rgba(0, 191, 255, 0.3); /* Blue glowy shadow */
+    padding: 20px; /* Adjusted padding for better alignment */
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 2rem; /* Added margin-top to avoid the container sticking to the top */
+}
+
+/* Task List */
+.task-list {
+    list-style-type: none;
+    padding-left: 120px;
+    margin-bottom: 2rem; /* Adjusted margin for better spacing */
+}
+
+.task-list li {
+    margin: 15px 0; /* Adjusted spacing between items */
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* Needed for absolute positioning of ::after */
+    padding-bottom: 10px; /* Space above the border */
+    
+}
+
+.task-list li::after {
+    content: "";
+    width: 80%; /* Adjust width to make it shorter */
+    height: 1px;
+    background-color: #009ACD; /* Match previous border color */
+    position: absolute;
+    bottom: 0;
+    box-shadow: 0px 0px 8px #009ACD, 0px 0px 15px rgba(0, 154, 205, 0.8);
+}
+
+.task-list li:last-child::after {
+    display: none; /* Removes border from the last item */
+}
+
+
+
+.task-list li:last-child {
+    border-bottom: none; /* Removes border from the last task */
+}
+
+/* Checkboxes */
+.task-list li input {
+    margin-right: 150px;
+    width: 25px; /* Adjusted checkbox size */
+    height: 25px;
+    accent-color: #00BFFF;
+}
+
+
+
+/* Submit Button */
+.submit-btn {
+    display: block; /* Makes the button a block element */
+    width: 30%;
+    padding: 12px; 
+    background-color: black;
+    color: white;
+    font-size: 1.4rem; 
+    border: 2px solid #003366;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    margin: 0 auto 2rem auto; /* Centers the button */
+}
+
+
+.submit-btn:hover {
+    background-color: #003366; /* Dark blue tint on hover */
+    border-color: #00BFFF; /* Light blue outline on hover */
+}
+
+/* Message */
+#message {
+    margin-top: 20px;
+    color: red;
+    font-size: 1.2rem;
+}
+
+/* Completed Tasks */
+.completed {
+    color: #00BFFF;
+    font-weight: bold;
+}
+
+/* Modal */
+#modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Black background with transparency */
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+#modalContent {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+#closeModal {
+    background-color: #00BFFF;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+#closeModal:hover {
+    background-color: #009ACD;
+}
+
+#modal2 {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Black background with transparency */
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+#modal2Content {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+#closeModal2 {
+    background-color: #00BFFF;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+#closeModal2:hover {
+    background-color: #009ACD;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>
+            <i class="fas fa-info-circle"></i> Daily Challenges
+        </h1>
+        
+        <ul class="task-list">
+            <li>
+                <label for="pushups">100 Push-ups</label>
+                <input type="checkbox" id="pushups">
+            </li>
+            <li>
+                <label for="pullups">100 Pull-ups</label>
+                <input type="checkbox" id="pullups">
+            </li>
+            <li>
+                <label for="squats">100 Squats</label>
+                <input type="checkbox" id="squats">
+            </li>
+            <li>
+                <label for="situps">100 Sit-ups</label>
+                <input type="checkbox" id="situps">
+            </li>
+            <li>
+                <label for="run">10 km Run</label>
+                <input type="checkbox" id="run">
+            </li>
+        </ul>
+        <button class="submit-btn" id="submitBtn">Submit</button>
+        <div id="message"></div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal">
+        <div id="modalContent">
+            <p>Player has finished all daily challenges.</p>
+            <button id="closeModal">Close</button>
+        </div>
+    </div>
+
+    <div id="modal2">
+        <div id="modal2Content">
+            <p>Player has failed to finish all challenges. Penalty will be given.</p>
+            <button id="closeModal2">Close</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function () {
+            const pushups = document.getElementById('pushups').checked;
+            const pullups = document.getElementById('pullups').checked;
+            const squats = document.getElementById('squats').checked;
+            const situps = document.getElementById('situps').checked;
+            const run = document.getElementById('run').checked;
+
+            const messageElement = document.getElementById('message');
+
+            if (pushups && pullups && squats && situps && run) {
+                messageElement.textContent = ""; // Clear the message
+                document.getElementById('modal').style.display = 'flex'; // Show the modal
+            } else {
+                messageElement.textContent = ""; // Clear the message
+                document.getElementById('modal2').style.display = 'flex'; // Show the modal
+            }
+        });
+
+        // Close the modal
+        document.getElementById('closeModal').addEventListener('click', function () {
+            document.getElementById('modal').style.display = 'none';
+        });
+
+        document.getElementById('closeModal2').addEventListener('click', function () {
+            document.getElementById('modal2').style.display = 'none';
+        });
+
+        // Optional: Change the style when each challenge is checked
+        const checkboxes = document.querySelectorAll('.task-list input');
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    this.previousElementSibling.classList.add('completed');
+                } else {
+                    this.previousElementSibling.classList.remove('completed');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
